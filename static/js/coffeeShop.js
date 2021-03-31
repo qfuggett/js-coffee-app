@@ -1,6 +1,7 @@
 "use strict";
 
 const addItemToCart = (itemName) => {
+  
   $('#cart-items').append(`
     <tr>
       <td>${itemName}</td>
@@ -8,10 +9,21 @@ const addItemToCart = (itemName) => {
   `);
 };
 
+$('.add-to-order').on('click', () => {
+  
+  addItemToCart('Coffee');
+  incrementCartTotal(1.50);
+});
+
 const resetCart = () => {
   $('#cart-total').html('0.00');
   $('#cart-items').empty();
 };
+
+$('#place-order').on('click', () => {
+  incrementCoffeeSold($('#cart-items').children().length); 
+  resetCart()
+});
 
 const incrementCartTotal = (price) => {
   const cartTotal = $('#cart-total');
